@@ -22,4 +22,12 @@ public class GameMaster : MonoBehaviour
     {
         
     }
+
+    public void ajouterStat(int intel, int cardio, int strenght, int dance)
+    {
+        Intel += intel;
+        Cardio += cardio;
+        Strenght += strenght;
+        Dance += dance;
+    }
 }
