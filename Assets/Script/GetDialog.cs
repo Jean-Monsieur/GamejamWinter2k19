@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class GetDialog : MonoBehaviour
@@ -10,7 +11,9 @@ public class GetDialog : MonoBehaviour
     public string Nom;
     public string TypeDialog;
     private string Dialog;
-    
+
+    public Text textDialog;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,29 +22,39 @@ public class GetDialog : MonoBehaviour
             //Load a text file (Assets/Resources/Text/textFile01.txt)
             var textFile = Resources.Load<TextAsset>("Dialog/"+Nom+"/"+TypeDialog);
             if (textFile == null)
-            {
-                Debug.LogError("Fichier text inexistant");
                 throw new InvalidOperationException("Fichier inexistant");
-            }
+            
             else
                 Dialog = textFile.text;
         }
-        catch(Exception e)
+        catch (InvalidOperationException e)
         {
-            Debug.Log(e.StackTrace.ToString());
+            Debug.LogError(e.ToString());
+            this.enabled = false;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.StackTrace.ToString());
             Debug.LogError("Erreur avec le fichier");
             this.enabled = false;
         }
-    }
-
-    public String getDialog()
-    {
-        return Dialog;
+        Debug.Log(Dialog);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        setDialog();
     }
+
+    public string getDialog()
+    {
+        return Dialog;
+    }
+
+    public void setDialog()
+    {
+        textDialog.text = getDialog();
+    }
+
 }
