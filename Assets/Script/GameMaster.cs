@@ -8,7 +8,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     public Text week, intel, cardio, strenght, dance;
 
-    public int Week, Intel, Cardio, Strenght, Dance;
+    private int Week, Intel, Cardio, Strenght, Dance;
 
     void Start()
     {
@@ -29,5 +29,11 @@ public class GameMaster : MonoBehaviour
         Cardio += cardio;
         Strenght += strenght;
         Dance += dance;
+    }
+    public void setStrenght(int _strenght)
+    {
+        Strenght = _strenght;
+        strenght.text = Strenght.ToString();
+        
     }
 }
