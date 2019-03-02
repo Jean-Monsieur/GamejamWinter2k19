@@ -19,6 +19,13 @@ public class BenchPressed : MonoBehaviour
     [SerializeField]
     GameObject GameMaster;
 
+    [SerializeField]
+    Sprite player;
+
+    int Strenght;
+    int hit;
+    int hitPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +33,8 @@ public class BenchPressed : MonoBehaviour
         StartYPos = this.transform.position.y;
         yPos = StartYPos;
         maxLevel = 40.0f;
-
+        hitPosition = 1;
+        hit = 0;
         StartCoroutine(Timer());
     }
 
@@ -35,11 +43,15 @@ public class BenchPressed : MonoBehaviour
     {
         if (Input.GetButtonDown("Hit") && yPos <= maxLevel)
         {
-
-            yPos += 2;
-            this.transform.position = (new Vector3(this.transform.position.x, yPos, this.transform.position.z));
-            win = true;
-
+            hit += 1;
+            //yPos += 2;
+            //this.transform.position = (new Vector3(this.transform.position.x, yPos, this.transform.position.z));
+            if(hit == 3)
+            {
+                hitPosition += 1;
+                player = Resources.Load<Sprite>("Sprites/Benchpress/sprite01");
+            }
+            
 
         }
 
@@ -52,7 +64,12 @@ public class BenchPressed : MonoBehaviour
 
 
         if (yPos >= maxLevel)
+        {
+            GameMaster.GetComponent<GameMaster>().setStrenght(5);
             WinScreen.SetActive(true);
+            win = true;
+        }
+
 
 
     }

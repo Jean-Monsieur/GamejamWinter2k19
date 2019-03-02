@@ -22,4 +22,11 @@ public class GameMaster : MonoBehaviour
     {
         
     }
+
+    public void setStrenght(int _strenght)
+    {
+        Strenght = _strenght;
+        strenght.text = Strenght.ToString();
+
+    }
 }
