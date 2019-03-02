@@ -8,14 +8,23 @@ public class BenchPressed : MonoBehaviour
     private float StartYPos;
     private float yPos;
     float maxLevel;
+    bool win;
+
+    [SerializeField]
+    GameObject WinScreen;
+
+    [SerializeField]
+    GameObject LooseScreen;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        win = false;
         StartYPos = this.transform.position.y;
         yPos = StartYPos;
         maxLevel = 40.0f;
+
+        StartCoroutine(Timer());
     }
 
     // Update is called once per frame
@@ -26,7 +35,7 @@ public class BenchPressed : MonoBehaviour
 
             yPos += 2;
             this.transform.position = (new Vector3(this.transform.position.x, yPos, this.transform.position.z));
-
+            win = true;
         }
 
         if(yPos > StartYPos && yPos <= maxLevel)
@@ -37,8 +46,19 @@ public class BenchPressed : MonoBehaviour
         }
 
 
+        if (yPos >= maxLevel)
+            WinScreen.SetActive(true);
+
+
+    }
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        if(win == false)
+            LooseScreen.SetActive(true);
     }
 
 
-   
 }
