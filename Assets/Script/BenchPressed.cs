@@ -16,6 +16,9 @@ public class BenchPressed : MonoBehaviour
     [SerializeField]
     GameObject LooseScreen;
 
+    [SerializeField]
+    GameObject GameMaster;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,8 @@ public class BenchPressed : MonoBehaviour
             yPos += 2;
             this.transform.position = (new Vector3(this.transform.position.x, yPos, this.transform.position.z));
             win = true;
+
+
         }
 
         if(yPos > StartYPos && yPos <= maxLevel)
